@@ -1,0 +1,118 @@
+/* #idHeading1 {
+           background-color: aqua;
+        } */
+
+p {
+    color: green;
+}
+
+.box-title {
+    background-color: aqua;
+    color: red;
+    /* width: 200px; */
+    border: 1px solid blue;
+    height: 60px;
+    text-align: center;
+}
+
+.box {
+    border: 1px blue solid;
+    width: 200px;
+    float: left;
+    margin: 5px;
+
+}
+
+.box-heading {
+    /* width: 200px; */
+}
+
+.box-content {
+    /* width: 200px; */
+    padding: 3px;
+    height: 120px;
+    border: 1px solid blue;
+}
+
+
+.loginForm {
+    clear: left;
+}
+
+/* 
+    Selectors
+    1. Id - #idName
+    2. class - .className
+    3. html tag - tagName
+*/
+
+#idEmpName {
+    background-color: yellow;
+    color: red;
+    font-style: italic;
+    font-family: cursive;
+    font-weight: bold;
+}
+
+img {
+    width: 140px;
+    height: 140px;
+    opacity: 0.4;
+}
+
+.myImage {
+    float: left;
+    margin: 5px;
+
+}
+
+img:hover {
+    opacity: 1;
+    border: 2px solid red;
+}
+
+/* syntax to apply pseudo classes in CSS 
+            selector : pseudoClassName {
+                property: value;
+            }
+        */
+li {
+    float: left;
+    padding: 10px;
+    list-style: none;
+    border: 1px solid black;
+    background-color: brown;
+}
+
+li a {
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+li:hover,
+li a:hover {
+    background-color: black;
+    color: red;
+}
+
+#music {
+    border-collapse: collapse;
+}
+
+#music td, #music th {
+    border: 1px solid red;
+}
+
+#music th {
+    background-color: brown;
+    color: white;
+}
+
+tr:nth-child(odd) {
+    background-color: antiquewhite;
+}
+
+tr:nth-child(even) {
+    background-color: azure;
+}

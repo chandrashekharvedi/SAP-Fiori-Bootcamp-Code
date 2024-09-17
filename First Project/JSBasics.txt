@@ -1,0 +1,178 @@
+var x = 10;
+x;
+typeof(x);
+x = '20';
+typeof(x);
+x = true;
+typeof(x);
+
+let arrFruits = ["Apple", "Banana", "Cherry"]
+arrFruits[1]
+arrFruits[0]
+arrFruits.length;
+arrFruits.push("Mango")
+arrFruits.pop()
+arrFruits
+arrFruits[arrFruits.length - 1]
+arrFruits.slice(-1)
+arrFruits
+arrFruits.splice(1, "Pinapple")
+arrFruits
+arrFruits.splice(1, 0, "Pinapple")
+arrFruits
+arrFruits.splice(2, 1)
+arrFruits
+
+
+console.log("Hello World");
+console.error("This is an Error")
+console.info("This is an Information text")
+
+for (let i = 0; i < arrFruits.length; i++) {
+    let element = arrFruits[i];
+    console.log(element);
+}
+
+arrFruits.forEach(function (item) {
+    console.log(item);
+});
+
+let name = "Shekhar Vedi"
+
+name.split(" ")
+name.split(" ")[1]
+
+name.concat(" is an SAP Fiori", " Trainer")
+
+
+// Objects in JS
+let oEmp = {
+	"name": "Shekhar Vedi",
+	"empId": 1001,
+	"salary": 50000,
+	"curr": "USD"
+}
+oEmp.name
+oEmp.salary
+oEmp.salary = 60000
+oEmp
+oEmp.hobbies = ["cricket", "football"]
+oEmp
+oEmp.hobbies.length
+oEmp.hobbies[0]
+
+let oEmployees = [
+    {
+        empId: 1001,
+        empName: "Ananya",
+        salary: 30000,
+        curr: "USD"
+    },
+    {
+        empId: 1002,
+        empName: "Divya",
+        salary: 40000,
+        curr: "JPY"
+    },
+    {
+        empId: 1003,
+        empName: "Siddhant",
+        salary: 50000,
+        curr: "USD"
+    },
+    {
+        empId: 1004,
+        empName: "Jack",
+        salary: 40000,
+        curr: "EUR"
+    }
+]
+oEmployees
+
+oEmployees.length
+
+oEmployees[2].salary
+
+oEmployees.forEach(function(oEmp) {
+    console.log(oEmp);
+})
+
+
+let oNewObject = {
+        empId: 1001,
+        empName: "Ananya",
+        salary: 30000,
+        curr: "USD"
+    }
+
+for(key in oNewObject) {
+    let value = oNewObject[key];
+    console.log(value);
+}
+
+for(key in oNewObject) {
+    let value = oNewObject[key];
+    console.log(key, " --> ", value);
+}
+
+function addToNumbers(a, b) {
+    let sum = a + b;
+}
+
+function addToNumbers(a, b) {
+    let sum = a + b;
+    console.log(sum);
+}
+
+addToNumbers(30, 20);
+
+addToNumbers('30', '20');
+
+addToNumbers(30, '20');
+
+let fnMultiply = function (...args) {
+    let result = 1;
+    for (let i = 0; i < args.length; i++) {
+        result = result * args[i];
+    }
+    console.log(result);
+}
+
+fnMultiply(3, 4, 5)
+
+let subtractToNum = (a, b) => {
+    console.log(a - b);
+}
+
+subtractToNum(20, 30)
+subtractToNum(50, 30)
+
+
+// Functions inside an Object
+
+let oNewObject = {
+        empId: 1001,
+        empFirstName: "Ananya",
+	empLastName: "Sharma",
+        salary: 30000,
+        curr: "USD",
+	fullName: function() {
+		return this.empFirstName + " " + this.empLastName;
+	}
+}
+
+
+
+// Array Filtering and Mapping
+let arrayFruits = ["Apple", "Banana", "Kiwi", "Pinapple"]
+
+let aNewFruits = arrayFruits.filter(function(name) {
+	if(name.includes("pple")) {
+	return name;	
+}
+})
+
+let aNewFruits2 = arrayFruits.map(function(name) {
+	name.concat(" --> Fruit");
+	return name;
+})
