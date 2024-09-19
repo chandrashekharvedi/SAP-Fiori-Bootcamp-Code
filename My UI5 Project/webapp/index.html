@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script
+		src="https://ui5.sap.com/resources/sap-ui-core.js"
+		data-sap-ui-theme="sap_horizon"
+		data-sap-ui-libs="sap.m"
+		data-sap-ui-resource-roots='{
+			"shekhar": "./"
+		}'>
+
+	</script>
+
+    <script>
+
+        // // Use the sapui5's button class from mobile library to add the button
+        // let oButton = new sap.m.Button("idIronman", {
+        //     text: "Ironman",
+        //     press: function() {
+        //         alert("I am Ironman.");
+        //     }
+        // });
+        // oButton.placeAt("content");
+
+        // Create a new view object and place it at the content
+        // let oView = new sap.ui.view({
+        //     viewName: "shekhar.view.Main",
+        //     id: "idMainView",
+        //     type: "JS"
+        // });
+
+        let oXMLView = new sap.ui.view({
+            viewName: "shekhar.view.Main",
+            id: "idMainXMLView",
+            type: "XML"
+        });
+        // Place the view at content
+        // oView.placeAt("content");
+        oXMLView.placeAt("content");
+
+    </script>
+
+</head>
+<body class="sapUiBody" >
+    <div id="content" ></div>
+</body>
+</html>

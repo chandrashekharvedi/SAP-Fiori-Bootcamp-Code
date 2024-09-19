@@ -1,0 +1,4 @@
+specVersion: "3.2"
+metadata:
+  name: my-ui5-project
+type: application

@@ -1,0 +1,16 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns:form="sap.ui.layout.form" xmlns="sap.m" controllerName="shekhar.controller.Main" >
+
+    <form:SimpleForm >
+        <Label text="Emp Id" ></Label>
+        <Input value="10001" id="idEmpId" ></Input>
+        <Label text="Emp Name" ></Label>
+        <Input value="Shekhar" id="idEmpName" ></Input>
+        <Label text="Salary" ></Label>
+        <Input value="70000" id="idEmpSalary" ></Input>
+        <Label text="Currency" ></Label>
+        <Input value="USD" id="idEmpCurr" ></Input>
+        <Label text="Smoker" ></Label>
+        <CheckBox id="idSmoker" selected="true" ></CheckBox>
+    </form:SimpleForm>
+    <Button text="Change" press="changeEmpName" ></Button>
+</mvc:View>
