@@ -1,16 +1,69 @@
-<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns:form="sap.ui.layout.form" xmlns="sap.m" controllerName="shekhar.controller.Main" >
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:form="sap.ui.layout.form" xmlns="sap.m" controllerName="shekhar.controller.Main" >
 
-    <form:SimpleForm >
+    <Table items="{/empTab}" itemPress="onItemPress" >
+        <columns>
+            <Column >
+                <Label text="Employee ID" ></Label>
+            </Column>
+            <Column >
+                <Label text="Employee Name" ></Label>
+            </Column>
+            <Column hAlign="Center" >
+                <Label text="Salary" ></Label>
+            </Column>
+            <Column >
+                <Label text="Smoker" ></Label>
+            </Column>
+            <Column >
+                <Label text="Gender" ></Label>
+            </Column>
+            <Column >
+                <Label text="Marital Status" ></Label>
+            </Column>
+            <Column >
+                <Label text="Rating" ></Label>
+            </Column>
+        </columns>
+        <items>
+            <ColumnListItem type="Active" >
+                <cells>
+                    <Text text="{empId}" ></Text>
+                    <Input value="{empName}" ></Input>
+                    <Text text="{salary} {currency}" ></Text>
+                    <CheckBox selected="{smoker}" ></CheckBox>
+                    <Image width="2rem" src="{= ${gender} === 'Male' ? 'https://cdn-icons-png.flaticon.com/256/6624/6624139.png' : 'https://png.pngtree.com/png-vector/20220901/ourmid/pngtree-avatar-the-icon-of-a-female-employee-wearing-suit-png-image_6133908.png' }" ></Image>
+                    <Select selectedKey="{mStat}" >
+                        <core:Item text="Married" key="M" ></core:Item>
+                        <core:Item text="Single" key="S" ></core:Item>
+                    </Select>
+                    <RatingIndicator maxValue="5" value="{rating}" tooltip="Rating Tooltip" />
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+
+    <form:SimpleForm id="idSimpleForm" >
         <Label text="Emp Id" ></Label>
-        <Input value="10001" id="idEmpId" ></Input>
+        <!-- Normal Binding Syntax -->
+        <Input value="{empId}" id="idEmpId" ></Input>
+
         <Label text="Emp Name" ></Label>
-        <Input value="Shekhar" id="idEmpName" ></Input>
+        <!-- Complex Binding Syntax -->
+        <!-- <Input value="{path: 'Avenger>/empStr/empName'}" id="idEmpName" ></Input> -->
+        <Input value="{= (${empName}).toUpperCase() }" id="idEmpName" ></Input>
+
         <Label text="Salary" ></Label>
-        <Input value="70000" id="idEmpSalary" ></Input>
+        <!-- <Input id="idEmpSalary" enabled="{= ${Avenger>/empStr/salary} > 10000 ? false : true}" ></Input> -->
+        <Input id="idEmpSalary" enabled="{= ${empName} === 'Shekhar' ? false : true}" ></Input>
+
         <Label text="Currency" ></Label>
-        <Input value="USD" id="idEmpCurr" ></Input>
+        <Input id="idEmpCurr" ></Input>
+
         <Label text="Smoker" ></Label>
-        <CheckBox id="idSmoker" selected="true" ></CheckBox>
+        <CheckBox id="idSmoker" selected="{smoker}" ></CheckBox>
+
+        <Label/>
+        <Button text="Change Data" press="onChangeData" ></Button>
     </form:SimpleForm>
-    <Button text="Change" press="changeEmpName" ></Button>
+    <Button id="idChangeButton" text="Change" press="changeEmpName" ></Button>
 </mvc:View>

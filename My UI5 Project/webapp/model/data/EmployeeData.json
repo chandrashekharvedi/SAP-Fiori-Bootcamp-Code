@@ -1,0 +1,10 @@
+{
+    "empStr": {
+        "empId": "10011",
+        "empName": "Emp Data Model",
+        "salary": 80000,
+        "currency": "EUR",
+        "smoker": true
+    },
+    "empTab": []
+}

@@ -1,0 +1,62 @@
+{
+    "empStr": {
+        "empId": "A001B",
+        "empName": "Avengers",
+        "salary": 40000,
+        "currency": "INR",
+        "smoker": false
+    },
+    "empTab": [
+        {
+            "empId": "A001DS",
+            "empName": "Dr. Strange",
+            "salary": 40000,
+            "currency": "INR",
+            "smoker": false,
+            "gender": "Male",
+            "mStat": "M",
+            "rating": 3
+        },
+        {
+            "empId": "A002A",
+            "empName": "Thor",
+            "salary": 20000,
+            "currency": "EUR",
+            "smoker": true,
+            "gender": "Male",
+            "mStat": "S",
+            "rating": 2
+        },
+        {
+            "empId": "A002D",
+            "empName": "Steve",
+            "salary": 30000,
+            "currency": "USD",
+            "smoker": false,
+            "gender": "Male",
+            "mStat": "M",
+            "rating": 3
+        },
+        {
+            "empId": "A3000B",
+            "empName": "Ironman",
+            "salary": 30000,
+            "currency": "JPY",
+            "smoker": true,
+            "gender": "Male",
+            "mStat": "M",
+            "rating": 3
+        },
+        {
+            "empId": "A001F",
+            "empName": "Scarlet",
+            "salary": 40000,
+            "currency": "INR",
+            "smoker": false,
+            "gender": "Female",
+            "mStat": "S",
+            "rating": 5
+        }
+
+    ]
+}
