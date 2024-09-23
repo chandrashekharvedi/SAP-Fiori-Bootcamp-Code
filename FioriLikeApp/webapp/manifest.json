@@ -1,0 +1,43 @@
+{   
+    "_version": "1.65.0",
+    "sap.app": {
+        "id": "ey.sd.products",
+        "type": "application",
+        "title":"{{appTitle}}",
+        "description": "{{appDescription}}",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "1.0.0"
+        }
+    },
+    "sap.ui": {
+        "deviceTypes": {
+            "desktop": true,
+            "phone": true,
+            "tablet": true
+        },
+        "technology": "UI5",
+        "supportedThemes": ["sap_horizon", "sap_horizon_dark", "sap_fiori_3"]
+    },
+    "sap.ui5": {
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "dependencies": {
+            "minUI5Version": "1.84.0",
+            "libs": {
+                "sap.ui.core": {"minVersion": "1.84.32"},
+                "sap.m": {"minVersion": "1.96.0"},
+                "sap.ui.layout": {"minVersion": "1.84.0"}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        }
+    }
+}

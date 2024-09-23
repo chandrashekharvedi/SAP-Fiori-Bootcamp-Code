@@ -1,0 +1,12 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="ey.sd.products.controller.View1">
+
+    <Page title="View 1"  >
+        <headerContent>
+            <Button icon="sap-icon://navigation-right-arrow" press="handleGoNext"></Button>
+        </headerContent>
+        <content>
+            <!-- <Button text="Go to Next Page" press="handleGoNext" ></Button> -->
+        </content>
+    </Page>
+
+</mvc:View>

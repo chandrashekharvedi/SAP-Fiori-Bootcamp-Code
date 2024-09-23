@@ -1,11 +1,13 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
-    "shekhar/model/models"
-], function(Controller, models) {
+    "shekhar/controller/BaseController",
+    "shekhar/model/models",
+    "shekhar/utils/formatter"
+], function(Controller, models, formatter) {
     "use strict"
     return Controller.extend("shekhar.controller.Main", {
 
         oCore: null,
+        Formatter: formatter,
 
         // HOOK Methods of the controller
 
@@ -54,6 +56,8 @@ sap.ui.define([
 
             // Method 2:
             this.getView().byId("idEmpCurr").bindProperty('value', 'currency');
+
+            this.myReuseFunction();
         },
 
         // onBeforeRendering: function() {
@@ -164,6 +168,8 @@ sap.ui.define([
             // Step 5: Bind simple form with the selected items path
             oSimpleForm.bindElement(sPath);
         
-        }
+        },
+
+        
     })
 })

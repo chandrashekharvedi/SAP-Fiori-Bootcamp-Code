@@ -1,0 +1,9 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="ey.sd.products.controller.View2">
+
+    <Page title="View 2" showNavButton="true" navButtonPress="handleGoBack"  >
+        <content>
+            <!-- <Button text="Go Back" press="handleGoBack" ></Button> -->
+        </content>
+    </Page>
+
+</mvc:View>

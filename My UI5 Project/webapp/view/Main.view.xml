@@ -28,8 +28,14 @@
             <ColumnListItem type="Active" >
                 <cells>
                     <Text text="{empId}" ></Text>
-                    <Input value="{empName}" ></Input>
-                    <Text text="{salary} {currency}" ></Text>
+                    <Input value="{path: 'empName', formatter: '.Formatter.convertToUpperCase'}" ></Input>
+                    <Text text="{
+                        parts: [
+                            {path: 'salary'},
+                            {path: 'currency'}
+                        ],
+                        formatter: '.Formatter.getFormattedAmount'
+                    }" ></Text>
                     <CheckBox selected="{= ${smoker} === 'true' ? true : false}" ></CheckBox>
                     <Image width="2rem" src="{= ${gender} === 'Male' ? 'https://cdn-icons-png.flaticon.com/256/6624/6624139.png' : 'https://png.pngtree.com/png-vector/20220901/ourmid/pngtree-avatar-the-icon-of-a-female-employee-wearing-suit-png-image_6133908.png' }" ></Image>
                     <Select selectedKey="{mStat}" >
