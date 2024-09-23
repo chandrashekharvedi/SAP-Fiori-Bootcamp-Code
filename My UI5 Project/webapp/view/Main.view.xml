@@ -1,27 +1,27 @@
 <mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:form="sap.ui.layout.form" xmlns="sap.m" controllerName="shekhar.controller.Main" >
 
-    <Table items="{/empTab}" itemPress="onItemPress" >
+    <Table items="{/empTab/row}" itemPress="onItemPress" >
         <columns>
             <Column >
-                <Label text="Employee ID" ></Label>
+                <Label text="{i18n>EMP_ID}" ></Label>
             </Column>
             <Column >
-                <Label text="Employee Name" ></Label>
+                <Label text="{i18n>EMP_NAME}" ></Label>
             </Column>
             <Column hAlign="Center" >
-                <Label text="Salary" ></Label>
+                <Label text="{i18n>SALARY}" ></Label>
             </Column>
             <Column >
-                <Label text="Smoker" ></Label>
+                <Label text="{i18n>SMOKER}" ></Label>
             </Column>
             <Column >
-                <Label text="Gender" ></Label>
+                <Label text="{i18n>GENDER}" ></Label>
             </Column>
             <Column >
-                <Label text="Marital Status" ></Label>
+                <Label text="{i18n>MARITAL_STAT}" ></Label>
             </Column>
             <Column >
-                <Label text="Rating" ></Label>
+                <Label text="{i18n>RATING_LBL}" ></Label>
             </Column>
         </columns>
         <items>
@@ -30,7 +30,7 @@
                     <Text text="{empId}" ></Text>
                     <Input value="{empName}" ></Input>
                     <Text text="{salary} {currency}" ></Text>
-                    <CheckBox selected="{smoker}" ></CheckBox>
+                    <CheckBox selected="{= ${smoker} === 'true' ? true : false}" ></CheckBox>
                     <Image width="2rem" src="{= ${gender} === 'Male' ? 'https://cdn-icons-png.flaticon.com/256/6624/6624139.png' : 'https://png.pngtree.com/png-vector/20220901/ourmid/pngtree-avatar-the-icon-of-a-female-employee-wearing-suit-png-image_6133908.png' }" ></Image>
                     <Select selectedKey="{mStat}" >
                         <core:Item text="Married" key="M" ></core:Item>
@@ -43,27 +43,27 @@
     </Table>
 
     <form:SimpleForm id="idSimpleForm" >
-        <Label text="Emp Id" ></Label>
+        <Label text="{i18n>EMP_ID}" ></Label>
         <!-- Normal Binding Syntax -->
         <Input value="{empId}" id="idEmpId" ></Input>
 
-        <Label text="Emp Name" ></Label>
+        <Label text="{i18n>EMP_NAME}" ></Label>
         <!-- Complex Binding Syntax -->
         <!-- <Input value="{path: 'Avenger>/empStr/empName'}" id="idEmpName" ></Input> -->
         <Input value="{= (${empName}).toUpperCase() }" id="idEmpName" ></Input>
 
-        <Label text="Salary" ></Label>
+        <Label text="{i18n>SALARY}" ></Label>
         <!-- <Input id="idEmpSalary" enabled="{= ${Avenger>/empStr/salary} > 10000 ? false : true}" ></Input> -->
         <Input id="idEmpSalary" enabled="{= ${empName} === 'Shekhar' ? false : true}" ></Input>
 
-        <Label text="Currency" ></Label>
+        <Label text="{i18n>CURR_LBL}" ></Label>
         <Input id="idEmpCurr" ></Input>
 
-        <Label text="Smoker" ></Label>
+        <Label text="{i18n>SMOKER}" ></Label>
         <CheckBox id="idSmoker" selected="{smoker}" ></CheckBox>
 
         <Label/>
-        <Button text="Change Data" press="onChangeData" ></Button>
+        <Button text="{i18n>CHANG_DATA_BTN_TXT}" press="onChangeData" ></Button>
     </form:SimpleForm>
-    <Button id="idChangeButton" text="Change" press="changeEmpName" ></Button>
+    <Button id="idChangeButton" text="{i18n>CHANGE_BTN_TXT}" press="changeEmpName" ></Button>
 </mvc:View>

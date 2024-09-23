@@ -5,6 +5,8 @@ sap.ui.define([
     "use strict"
     return Controller.extend("shekhar.controller.Main", {
 
+        oCore: null,
+
         // HOOK Methods of the controller
 
         // This method is used to initialize the controller - it will be executed only once
@@ -23,6 +25,13 @@ sap.ui.define([
             //     "empTab": []
             // });
 
+            this.oCore = sap.ui.getCore();
+
+            let oXMLModel = models.createXMLModel("datasetXML.xml");
+
+            // Get the object of resource model
+            let oResourceModel = models.createResourceModel();
+
 
             // Step 1: get the model object from the models.js
             let oModel = models.createJSONModel("dataset.json");
@@ -32,7 +41,11 @@ sap.ui.define([
             // Step 3: Make the model aware to the application / view / controller
             // sap.ui.getCore().setModel(oModel);  // to set the model on application level
             this.getView().setModel(oAvenger, "Avenger"); // to set the model on view level
-            this.getView().setModel(oModel);
+            // this.getView().setModel(oModel);
+            this.getView().setModel(oXMLModel);
+
+            // Set the Resource Model on Application Level
+            this.oCore.setModel(oResourceModel, "i18n");
 
 
             // Different Binding Syntax
@@ -67,7 +80,7 @@ sap.ui.define([
         clickMe: function() {
             // Method 1: Getting the control object using App Object
             // Step 1: get the object of the app
-            let oApp = sap.ui.getCore();
+            let oApp = this.oCore;
             // Step 2: From the 'App' Object get the control objet of input field
             let oInput = oApp.byId("idSpiderman");
             // Step 3: Call a ui5 method/fuction on the the input field to get the value property
