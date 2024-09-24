@@ -1,7 +1,10 @@
-<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="ey.sd.products.controller.App">
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    controllerName="ey.sd.products.controller.App"
+>
+    <!-- <App id="appCon">
 
-    <App id="appCon">
-
-    </App>
-
+    </App> -->
+    <SplitApp id="appCon"></SplitApp>
 </mvc:View>

@@ -3,7 +3,6 @@ sap.ui.define([
 ], function(Controller) {
     'use strict';
     return Controller.extend("ey.sd.products.controller.BaseController", {
-        oCore: sap.ui.getCore(),
         x: "Shekhar"
     });
 })

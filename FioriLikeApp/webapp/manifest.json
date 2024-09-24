@@ -1,43 +1,95 @@
-{   
-    "_version": "1.65.0",
-    "sap.app": {
+{
+    "_version": "1.43.0",
+    "sap.app":{
         "id": "ey.sd.products",
         "type": "application",
-        "title":"{{appTitle}}",
-        "description": "{{appDescription}}",
-        "i18n": "i18n/i18n.properties",
+        "ach": "FIN-AC-AP",
         "applicationVersion": {
             "version": "1.0.0"
-        }
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDesciption}}",
+        "i18n": "i18n/i18n.properties"
     },
-    "sap.ui": {
+    "sap.ui":{
         "deviceTypes": {
             "desktop": true,
             "phone": true,
-            "tablet": true
+            "tablet":true 
         },
-        "technology": "UI5",
-        "supportedThemes": ["sap_horizon", "sap_horizon_dark", "sap_fiori_3"]
+        "supportedThemes": ["sap_fiori_3","sap_fiori_3_dark"],
+        "fullWidth": true,
+        "technology": "UI5"
     },
     "sap.ui5": {
-        "resources": {
-            "css": [
-                {
-                    "uri": "css/style.css"
-                }
-            ]
-        },
         "dependencies": {
-            "minUI5Version": "1.84.0",
+            "minUI5Version": "1.100",
             "libs": {
-                "sap.ui.core": {"minVersion": "1.84.32"},
-                "sap.m": {"minVersion": "1.96.0"},
-                "sap.ui.layout": {"minVersion": "1.84.0"}
+                "sap.ui.core": { "minVersion": "1.99" },
+                "sap.m": {},
+                "sap.ui.layout": {}
             }
         },
         "contentDensities": {
             "compact": true,
             "cozy": true
+        },
+        "rootView":{
+            "id": "idRootView",
+            "viewName": "ey.sd.products.view.App",
+            "type": "XML"
+        },
+        "routing": {
+            "config":{
+                "routerClass": "sap.m.routing.Router",
+                "viewPath": "ey.sd.products.view",
+                "viewType": "XML",
+                "controlId": "appCon"
+            },
+            "routes":[
+                {
+                    "pattern": "",
+                    "name": "spiderman",
+                    "target":["joe","biden"]
+                },{
+                    "pattern": "fruit/{fruitId}",
+                    "name": "superman",
+                    "target":["joe", "modi"]
+                }
+            ],
+            "targets": {
+                "joe": {
+                    "viewId": "idView1",
+                    "viewName": "View1",
+                    "controlAggregation": "masterPages"
+                },
+                "biden": {
+                    "viewId": "idEmpty",
+                    "viewName": "Empty",
+                    "controlAggregation": "detailPages"
+                },
+                "modi": {
+                    "viewId": "idView2",
+                    "viewName": "View2",
+                    "controlAggregation": "detailPages"
+                }
+            }
+        },
+        "models": {
+            "":{
+                "type": "sap.ui.model.json.JSONModel",
+                "uri": "model/mockdata/fruits.json",
+                "preload": false,
+                "settings": {}
+            },
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "preload": true,
+                "settings": {
+                    "bundleUrl": "i18n/i18n.properties"
+                }
+            }
         }
+        
     }
 }

@@ -1,0 +1,11 @@
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    controllerName="ey.sd.products.controller.Empty"
+>
+    <Page title="Empty View">
+        <content>
+            <Image src="https://m.media-amazon.com/images/I/81N67ptRUEL.jpg" />
+        </content>
+    </Page>
+</mvc:View>
