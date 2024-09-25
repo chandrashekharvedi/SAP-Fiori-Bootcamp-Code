@@ -50,27 +50,38 @@
                 {
                     "pattern": "",
                     "name": "spiderman",
-                    "target":["joe","biden"]
-                },{
-                    "pattern": "fruit/{fruitId}",
-                    "name": "superman",
-                    "target":["joe", "modi"]
+                    "target": ["tom", "empty"]
+                },
+                {
+                    "pattern": "fruits/{fruitId}:?query:",
+                    "name": "fruits",
+                    "target": ["tom", "jerry"]
+                },
+                {
+                    "pattern": "supplier/{supplierId}",
+                    "name": "supplier",
+                    "target": ["tom", "supplier"]
                 }
             ],
             "targets": {
-                "joe": {
-                    "viewId": "idView1",
+                "tom": {
                     "viewName": "View1",
-                    "controlAggregation": "masterPages"
+                    "controlAggregation": "masterPages",
+                    "viewId": "idView1"
                 },
-                "biden": {
-                    "viewId": "idEmpty",
+                "jerry": {
+                    "viewId": "idView2",
+                    "viewName": "View2",
+                    "controlAggregation": "detailPages"
+                },
+                "empty": {
+                    "viewId": "idEmptyView",
                     "viewName": "Empty",
                     "controlAggregation": "detailPages"
                 },
-                "modi": {
-                    "viewId": "idView2",
-                    "viewName": "View2",
+                "supplier": {
+                    "viewId": "idSupplierView",
+                    "viewName": "Supplier",
                     "controlAggregation": "detailPages"
                 }
             }
@@ -81,6 +92,10 @@
                 "uri": "model/mockdata/fruits.json",
                 "preload": false,
                 "settings": {}
+            },
+            "UIprops": {
+                "type": "sap.ui.model.json.JSONModel",
+                "preload": false
             },
             "i18n": {
                 "type": "sap.ui.model.resource.ResourceModel",

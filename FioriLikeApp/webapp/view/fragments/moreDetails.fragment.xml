@@ -1,0 +1,27 @@
+<core:FragmentDefinition
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:layout="sap.ui.layout"
+>
+    <form:SimpleForm layout="ResponsiveGridLayout">
+        <form:content>
+            <Label text="Name" />
+            <Input value="{name}">
+                <layoutData>
+                    <layout:GridData
+                        spanL="4"
+                        spanM="5"
+                        spanS="6"
+                    />
+                </layoutData>
+            </Input>
+            <Label text="Type" />
+            <Text text="{type}" />
+            <Label text="Price" />
+            <Text text="{price} {unit}" />
+            <Label text="Benefits" />
+            <Text text="{healthBenefits}" />
+        </form:content>
+    </form:SimpleForm>
+</core:FragmentDefinition>

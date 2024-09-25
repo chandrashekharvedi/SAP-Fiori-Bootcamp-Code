@@ -1,6 +1,9 @@
 <mvc:View
+    xmlns:core="sap.ui.core"
+    xmlns:layout="sap.ui.layout"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
+    xmlns:form="sap.ui.layout.form"
     controllerName="ey.sd.products.controller.View2"
 >
     <Page
@@ -16,13 +19,74 @@
                 numberUnit="{unit}"
                 icon="{image}"
             />
+            <!-- <MessageStrip
+                text="Info:- This is the example of message strip"
+                showIcon="true"
+                showCloseButton="true"
+                type="Information"
+            />
+            <MessageStrip
+                text="Error:- This is the example of message strip"
+                showIcon="true"
+                showCloseButton="true"
+                type="Error"
+            />
+            <MessageStrip
+                text="Success:- This is the example of message strip"
+                showIcon="true"
+                showCloseButton="true"
+                type="Success"
+            />
+            <MessageStrip
+                text="Warning:- This is the example of message strip"
+                showIcon="true"
+                showCloseButton="true"
+                type="Warning"
+            /> -->
+            <IconTabBar selectedKey="{UIprops>/selectedIconTab}">
+                <items>
+                    <IconTabFilter
+                        text="More Info"
+                        icon="sap-icon://information"
+                        key="moreDetails"
+                    >
+                        <core:Fragment
+                            fragmentName="ey.sd.products.view.fragments.moreDetails"
+                            type="XML"
+                        />
+                    </IconTabFilter>
+                    <IconTabFilter
+                        text="Suppliers"
+                        icon="sap-icon://supplier"
+                        key="supplier"
+                    >
+                        <!-- <Text text="Supplier information will be added here later" /> -->
+                        <core:Fragment
+                            fragmentName="ey.sd.products.view.fragments.supplier"
+                            type="XML"
+                        />
+                    </IconTabFilter>
+                    <IconTabFilter
+                        text="Cities"
+                        icon="sap-icon://map-2"
+                        key="cities"
+                    >
+                        <!-- <Text text="Cities Data will be shown here shortly" /> -->
+
+                        <core:Fragment
+                            fragmentName="ey.sd.products.view.fragments.cities"
+                            type="XML"
+                        />
+                    </IconTabFilter>
+                </items>
+            </IconTabBar>
         </content>
         <footer>
             <Toolbar>
                 <ToolbarSpacer />
                 <Button
                     text="Save"
-                    press=""
+                    press="onSave"
                     type="Accept"
                 />
                 <Button

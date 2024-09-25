@@ -1,0 +1,22 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="ey.sd.products.controller.Supplier" >
+
+    <Page title="Supplier: {name}" showNavButton="true" navButtonPress="onBack">
+
+        <content>
+            <ObjectHeader
+                title="{name}"
+                intro="{city}"
+                number="{contactPerson}"
+                numberUnit="{phone}"
+                icon="sap-icon://supplier">
+            
+                <attributes>
+                    <ObjectAttribute title="Email" text="{email}" ></ObjectAttribute>
+                    <ObjectAttribute title="Since When" text="{sinceWhen}" ></ObjectAttribute>
+                </attributes>
+            </ObjectHeader>
+        </content>
+
+    </Page>
+
+</mvc:View>

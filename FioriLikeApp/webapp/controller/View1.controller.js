@@ -10,20 +10,27 @@ sap.ui.define([
             this.oRouter = this.getOwnerComponent().getRouter();
         },
         handleGoNext: function(sPath) {
-            // user case: to navigate to View2
-            let oView = this.getView();
-            let oAppCon = oView.getParent();
-            // oAppCon.to("idView2");
 
-            if(sPath){
-                // let oView2 = oAppCon.getPage("idView2");
-                let oView2 = oAppCon.getParent().getDetailPages()[1];
-                // bind the view 2 with the binding path using element binding
-                oView2.bindElement(sPath);
-                // Navigate to view 2
-                // oAppCon.to("idView2");
-                oAppCon.getParent().toDetail("idView2");
-            }
+            // routerObj.navTo("nameOfRoute", oOptions?)
+
+            this.oRouter.navTo("fruits", {
+                fruitId: sPath
+            });
+
+            // // user case: to navigate to View2
+            // let oView = this.getView();
+            // let oAppCon = oView.getParent();
+            // // oAppCon.to("idView2");
+
+            // if(sPath){
+            //     // let oView2 = oAppCon.getPage("idView2");
+            //     let oView2 = oAppCon.getParent().getDetailPages()[1];
+            //     // bind the view 2 with the binding path using element binding
+            //     oView2.bindElement(sPath);
+            //     // Navigate to view 2
+            //     // oAppCon.to("idView2");
+            //     oAppCon.getParent().toDetail("idView2");
+            // }
         },
 
         handleFruitsSearch: function(oEvent) {
@@ -31,10 +38,12 @@ sap.ui.define([
             let sQuery = oEvent.getParameter("query");
             // Step 2: Construct the filters
             let oFilter1 = new Filter("name", FilterOperator.Contains, sQuery);
-            let oFilter2 = new Filter("type", "Contains", sQuery);
+            let oFilter2 = new Filter("name", FilterOperator.StartsWith, sQuery);
+            let oFilter3 = new Filter("type", "Contains", sQuery);
+            let oFilter4 = new Filter("type", "StartsWith", sQuery);
             // Step 3: Combine the filters
             let oFilter = new Filter({
-                filters: [oFilter1, oFilter2],
+                filters: [oFilter1, oFilter2, oFilter3, oFilter4],
                 and: false
             });
             // Step 4: Get the list object using its id
@@ -73,8 +82,10 @@ sap.ui.define([
             let oSelectedItem = oEvent.getParameter("listItem");
             // Get the selected elements path
             let sPath = oSelectedItem.getBindingContextPath();
+            // Get the index of the item in the model
+            let sIndex = sPath.split("/")[2];
             // Call the Go to Next function navigate on view 2 with the path
-            this.handleGoNext(sPath);
+            this.handleGoNext(sIndex);
         }
     });
 })
