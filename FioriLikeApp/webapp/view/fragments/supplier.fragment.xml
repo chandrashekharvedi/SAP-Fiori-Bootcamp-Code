@@ -42,8 +42,8 @@
         <items>
             <ColumnListItem type="Navigation">
                 <cells>
-                    <Input value="{name}" showValueHelp="true" valueHelpRequest="onFilterSupplier" />
-                    <Input value="{city}" showValueHelp="true" valueHelpRequest="handleValueHelpRequest" />
+                    <Input value="{name}" showValueHelp="true" valueHelpRequest="onF4HelpRequest($event, 'Supplier')" />
+                    <Input value="{city}" showValueHelp="true" valueHelpRequest="onF4HelpRequest($event, 'City')" />
                     <Text text="{sinceWhen}" />
                     <Text text="{contactPerson}" />
                 </cells>

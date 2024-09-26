@@ -4,5 +4,5 @@
     xmlns:form="sap.ui.layout.form"
     xmlns:layout="sap.ui.layout"
 >
-    <SelectDialog ></SelectDialog>
+    <SelectDialog id="popup" search="onF4Search" confirm="onF4Confirm" ></SelectDialog>
 </core:FragmentDefinition>

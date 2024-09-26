@@ -3,8 +3,9 @@ sap.ui.define([
     "sap/m/Column",
     "sap/m/MessageToast",
     "sap/m/MessageBox",
-    "sap/ui/core/Fragment"
-], function(Controller, Column, MessageToast, MessageBox, Fragment) {
+    "sap/ui/core/Fragment",
+    "sap/ui/model/Filter"
+], function(Controller, Column, MessageToast, MessageBox, Fragment, Filter) {
     'use strict';
     return Controller.extend("ey.sd.products.controller.View2", {
         // Controllers Constructor method
@@ -172,13 +173,33 @@ sap.ui.define([
             
         },
         SupplierFrag: null,
-        onFilterSupplier: function() {
-            if (!this.SupplierFrag) {
-                this.loadFragment({
-                    name: "ey.sd.products.view.fragments.popup"
-                }).then(
-                    (oDialog) => {
-                        this.SupplierFrag = oDialog;
+        F4ValueHelpPopup: null,
+        oInputField: null,
+        onF4HelpRequest: function(oEvent, sField) {
+            // if (!this.SupplierFrag) {
+            //     this.loadFragment({
+            //         name: "ey.sd.products.view.fragments.popup"
+            //     }).then(
+            //         (oDialog) => {
+            //             this.SupplierFrag = oDialog;
+            //             oDialog.setTitle("Select Supplier");
+            //             oDialog.bindAggregation("items", {
+            //                 path: "/suppliers",
+            //                 template: new sap.m.DisplayListItem({
+            //                     label: "{name}",
+            //                     value: "{city}"
+            //                 })
+            //             });
+            //             oDialog.open();
+            //         }
+            //     )
+            // } else {
+            //     this.SupplierFrag.open();
+            // }
+
+            const fnBindValueHelp = (oDialog, sField) => {
+                switch (sField) {
+                    case 'Supplier':
                         oDialog.setTitle("Select Supplier");
                         oDialog.bindAggregation("items", {
                             path: "/suppliers",
@@ -188,11 +209,59 @@ sap.ui.define([
                             })
                         });
                         oDialog.open();
+                        
+                        break;
+                    case 'City':
+                        oDialog.setTitle("Select Citites");
+                        oDialog.bindAggregation("items", {
+                            path: "/cities",
+                            template: new sap.m.DisplayListItem({
+                                label: "{name}",
+                                value: "{state}"
+                            })
+                        });
+                        oDialog.open();
+                        break;
+                }
+            }
+
+            this.oInputField = oEvent.getSource();
+
+
+            if (!this.F4ValueHelpPopup) {
+                this.loadFragment({
+                    name: "ey.sd.products.view.fragments.popup"
+                }).then(
+                    (oDialog) => {
+                        this.F4ValueHelpPopup = oDialog;
+                        fnBindValueHelp(oDialog, sField);
                     }
                 )
             } else {
-                this.SupplierFrag.open();
+                fnBindValueHelp(this.F4ValueHelpPopup, sField);
             }
+        },
+        onF4Search: function(oEvent) {
+            // Get the value of search query
+            let sValue = oEvent.getParameter("value");
+            // Get the source object (Select Dialog)
+            let oSource = oEvent.getSource();
+            
+            // Counstruct the filter to apply it on the binding
+            let oFilter = new Filter("name", "Contains", sValue);
+            // Get the items binding of select dialog
+            let oBinding = oSource.getBinding("items");
+            // Apply the filter on binding
+            oBinding.filter([oFilter]);
+        },
+
+        onF4Confirm: function(oEvent) {
+            // Get the selected item
+            let oSelectedItem = oEvent.getParameter("selectedItem");
+            // Get the data of selected item
+            let oSelectedItemData = oSelectedItem.getBindingContext().getObject();
+            // Set the name of the selected item in the input field
+            this.oInputField.setValue(oSelectedItemData.name);
         }
     });
 })
