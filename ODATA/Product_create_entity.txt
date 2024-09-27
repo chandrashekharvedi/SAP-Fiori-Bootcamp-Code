@@ -1,0 +1,56 @@
+  METHOD productset_create_entity.
+
+    DATA: ls_entity  TYPE zcl_zey_sept_odata_mpc=>ts_product,
+          ls_product TYPE bapi_epm_product_header,
+          lt_return  TYPE TABLE OF bapiret2.
+
+    "Step 1: Read all the incoming data
+    io_data_provider->read_entry_data(
+      IMPORTING
+        es_data = ls_entity
+    ).
+    "Step 2: Pre-checks if needed
+    IF ls_entity-name IS INITIAL.
+      RAISE EXCEPTION TYPE /iwbep/cx_mgw_busi_exception
+        EXPORTING
+          message_unlimited = |Please prove a valid product name|.
+    ENDIF.
+    IF ls_entity-product_id IS INITIAL.
+      RAISE EXCEPTION TYPE /iwbep/cx_mgw_busi_exception
+        EXPORTING
+          message_unlimited = |Please prove a valid product ID|.
+    ENDIF.
+
+
+    MOVE-CORRESPONDING ls_entity TO ls_product.
+
+    "Step 3: Call BAPI/Class/ABAP Code/FM to insert data in table
+    CALL FUNCTION 'BAPI_EPM_PRODUCT_CREATE'
+      EXPORTING
+        headerdata = ls_product            " EPM: Product header data of BOR object SEPM002
+      TABLES
+        return     = lt_return.            " Return Parameter
+
+    "Step 4: Error Handling
+    IF lt_return IS NOT INITIAL.
+
+      me->mo_context->get_message_container( )->add_messages_from_bapi(
+
+        EXPORTING
+          it_bapi_messages = lt_return
+
+      ).
+
+
+      RAISE EXCEPTION TYPE /iwbep/cx_mgw_busi_exception
+        EXPORTING
+          message_container = me->mo_context->get_message_container( ).
+
+    ENDIF.
+
+
+    "Step 5: Map the response back
+
+    MOVE-CORRESPONDING ls_entity TO er_entity.
+
+  ENDMETHOD.

@@ -1,0 +1,56 @@
+  METHOD productset_update_entity.
+
+    DATA: ls_product   TYPE bapi_epm_product_header,
+          ls_product_x TYPE bapi_epm_product_headerx,
+          ls_entity    TYPE zcl_zey_sept_odata_mpc=>ts_product,
+          lv_prod_id   TYPE bapi_epm_product_id,
+          lt_return    TYPE TABLE OF bapiret2.
+
+    "Step 1: Read the incoming data from the API and Key property from key table
+    READ TABLE it_key_tab INTO DATA(ls_key) INDEX 1.
+    lv_prod_id = ls_key-value.
+
+    io_data_provider->read_entry_data(
+      IMPORTING
+        es_data = ls_entity
+    ).
+    MOVE-CORRESPONDING ls_entity TO ls_product.
+
+    "Step 2: Implement Pre-Checks if needed
+
+    ls_product_x-product_id = lv_prod_id.
+    ls_product_x-name = abap_true.
+    ls_product_x-description = abap_true.
+    ls_product_x-price = abap_true.
+    ls_product_x-currency_code = abap_true.
+
+
+    "Step 3: Call the BAPI / Class / FM / ABAP Code to update the record
+    CALL FUNCTION 'BAPI_EPM_PRODUCT_CHANGE'
+      EXPORTING
+        product_id  = lv_prod_id        " EPM: Product Id
+        headerdata  = ls_product       " EPM: Product header data of BOR object SEPM002
+        headerdatax = ls_product_x                " EPM: Product header modif. info for BOR object 'EpmProduct'
+*       persist_to_db       = abap_true        " Flag: Save data to DB (yes/no)
+      TABLES
+        return      = lt_return.                  " Return Parameter
+
+    "Step 4: Error handling
+
+    IF lt_return IS NOT INITIAL.
+
+      me->mo_context->get_message_container( )->add_messages_from_bapi(
+        EXPORTING
+          it_bapi_messages = lt_return
+      ).
+
+      RAISE EXCEPTION TYPE /iwbep/cx_mgw_busi_exception
+        EXPORTING
+          message_container = me->mo_context->get_message_container( ).
+
+    ENDIF.
+
+    "Step 5: Mapping the response
+    MOVE-CORRESPONDING ls_entity TO er_entity.
+
+  ENDMETHOD.

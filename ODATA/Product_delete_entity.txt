@@ -1,0 +1,44 @@
+  method PRODUCTSET_DELETE_ENTITY.
+
+    data: lv_prod_id type bapi_epm_product_id,
+          lt_return type TABLE OF bapiret2.
+    "Step 1: Read the key property of the product.
+
+    READ TABLE it_key_Tab into data(ls_key) INDEX 1.
+    IF sy-subrc = 0.
+
+      lv_prod_id = ls_key-value.
+
+    else.
+
+      RAISE EXCEPTION TYPE /iwbep/cx_mgw_busi_exception
+        EXPORTING
+          message_unlimited      =  |Please provide a valid product id.|
+      .
+
+    ENDIF.
+
+    "Step 2: Call the bapi/class/fm/select to delete the record from table
+    CALL FUNCTION 'BAPI_EPM_PRODUCT_DELETE'
+      EXPORTING
+        product_id    =       lv_prod_id           " EPM: Product ID
+      TABLES
+        return        =       lt_return           " Return Parameter
+      .
+     "Step 3: Error Handling
+    IF lt_return is NOT INITIAL.
+
+      me->mo_context->get_message_container( )->add_messages_from_bapi(
+        EXPORTING
+          it_bapi_messages = lt_return
+      ).
+
+      RAISE EXCEPTION TYPE /iwbep/cx_mgw_busi_exception
+        EXPORTING
+          message_container      = me->mo_context->get_message_container( )
+      .
+
+    ENDIF.
+
+
+  endmethod.

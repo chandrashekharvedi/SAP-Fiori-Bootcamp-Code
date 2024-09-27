@@ -1,0 +1,58 @@
+  METHOD productset_get_entity.
+    "Step 1: Declare all the required data type
+    DATA: lv_pid    TYPE bapi_epm_product_id,
+          ls_header TYPE bapi_epm_product_header,
+          lt_return TYPE TABLE OF bapiret2.
+
+
+
+    "Step 2: Reading the Key properties of the entity
+
+    READ TABLE it_key_tab INTO DATA(ls_key) WITH KEY name = 'PRODUCT_ID'.
+
+    IF sy-subrc = 0.
+
+      lv_pid = ls_key-value.
+
+      IF lv_pid is INITIAL.
+
+        RAISE EXCEPTION TYPE /iwbep/cx_mgw_busi_exception
+          EXPORTING
+            message_unlimited      = |Hey! You haven't provided the ID of the Product|
+        .
+
+
+      ENDIF.
+
+
+    ENDIF.
+
+    "Step 3: Read the data from BAPI / FM / Select using the key
+    CALL FUNCTION 'BAPI_EPM_PRODUCT_GET_DETAIL'
+      EXPORTING
+        product_id = lv_pid     " EPM: Product header data of BOR object SEPM002
+      IMPORTING
+        headerdata = ls_header         " EPM: Product header data of BOR object SEPM002
+      TABLES
+*       conversion_factors =                  " EPM: Product conversion factor data of BOR object SEPM002
+        return     = lt_return.                  " Return Parameter
+
+    IF lt_Return is not INITIAL.
+
+      me->mo_context->get_message_container( )->add_messages_from_bapi(
+        EXPORTING
+          it_bapi_messages          =       lt_return           " Return parameter table
+      ).
+
+      RAISE EXCEPTION TYPE /iwbep/cx_mgw_busi_exception
+        EXPORTING
+          message_container      = me->mo_context->get_message_container( )
+      .
+
+    ENDIF.
+
+
+    "Step 4: Mapping the data in the output of er_entity
+
+    MOVE-CORRESPONDING ls_header TO er_entity.
+  ENDMETHOD.

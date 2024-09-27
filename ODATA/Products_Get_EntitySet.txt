@@ -1,0 +1,53 @@
+  method PRODUCTSET_GET_ENTITYSET.
+
+    "Step 1: Declare the data types
+    DATA: lt_header TYPE TABLE OF bapi_epm_product_header,
+          lv_top type i,
+          lv_skip type i,
+          lv_total type i,
+          ls_entity type zcl_ZEY_SEPT_ODATA_mpc=>ts_product,
+          ls_row type bapi_epm_max_rows,
+          lt_cat_sel type table of BAPI_EPM_PRODUCT_CATEG_RANGE.
+
+    lv_top = is_paging-top.
+    lv_skip = is_paging-skip.
+
+    lv_total = lv_top + lv_skip.
+    ls_row-bapimaxrow = lv_total.
+
+    "Step 2: Calling the class / Function Module / Select to prepare the data
+    READ TABLE it_filter_select_options INTO data(ls_sel_option) with key property = 'CATEGORY'.
+
+    LOOP AT ls_sel_option-select_options INTO data(ls_filters).
+      APPEND value #( sign = ls_filters-sign
+                      option = ls_filters-option
+                      low = ls_filters-low
+                      high = ls_filters-high ) to lt_cat_sel.
+
+    ENDLOOP.
+
+*         Step 2.1 Read the data from BAPI
+    call FUNCTION 'BAPI_EPM_PRODUCT_GET_LIST'
+      EXPORTING
+         max_rows = ls_row  " maximum number of lines of hits
+        TABLES
+          headerdata = lt_header " EPM: Product header data
+          selparamcategories = lt_cat_sel " EPM: Range table for product categories
+    .
+    "Step 3: Map our data to the output of odata
+
+    IF lv_total > 0.
+      LOOP AT lt_header into data(ls_header) from lv_skip + 1 to lv_total.
+
+        MOVE-CORRESPONDING ls_header to ls_entity.
+        APPEND ls_entity to et_entityset.
+
+      ENDLOOP.
+    ELSE.
+
+      ET_ENTITYSET = CORRESPONDING #( lt_header ).
+
+    ENDIF.
+
+
+  endmethod.

@@ -1,0 +1,35 @@
+  METHOD supplierset_get_entityset.
+    "Step 1: Declare the data types
+    DATA: lt_bapi_bps TYPE TABLE OF bapi_epm_bp_header,
+          lv_top      TYPE i,
+          lv_skip     TYPE i,
+          lv_total    TYPE i,
+          ls_row      TYPE bapi_epm_max_rows,
+          ls_entity   TYPE zcl_ZEY_SEPT_ODATA_mpc=>ts_supplier.
+
+    lv_top = is_paging-top.
+    lv_skip = is_paging-skip.
+
+    lv_total = lv_top + lv_skip.
+    ls_row-bapimaxrow = lv_total.
+
+    "Step 2: Calling the class / Function Module / Select to prepare the data
+    CALL FUNCTION 'BAPI_EPM_BP_GET_LIST'
+      EXPORTING
+        max_rows     = ls_row        " EPM: Max row specifictation
+      TABLES
+        bpheaderdata = lt_bapi_bps.           " EPM: Business Partner header data ( BOR SEPM004 )
+    "Step 3: Map our data to the output of odata
+
+    IF lv_total > 0.
+      LOOP AT lt_bapi_bps INTO DATA(wa) FROM lv_skip + 1 TO lv_total.
+
+        MOVE-CORRESPONDING wa TO ls_entity.
+        APPEND ls_entity TO et_entityset.
+
+      ENDLOOP.
+    ELSE.
+      MOVE-CORRESPONDING lt_bapi_bps TO et_entityset.
+
+    ENDIF.
+  ENDMETHOD.
