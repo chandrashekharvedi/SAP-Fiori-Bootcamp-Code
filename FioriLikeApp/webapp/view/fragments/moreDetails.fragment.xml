@@ -4,10 +4,10 @@
     xmlns:form="sap.ui.layout.form"
     xmlns:layout="sap.ui.layout"
 >
-    <form:SimpleForm layout="ResponsiveGridLayout">
+    <form:SimpleForm layout="ResponsiveGridLayout" editable="true">
         <form:content>
             <Label text="Name" />
-            <Input value="{name}">
+            <Input value="{NAME}">
                 <layoutData>
                     <layout:GridData
                         spanL="4"
@@ -16,12 +16,19 @@
                     />
                 </layoutData>
             </Input>
-            <Label text="Type" />
-            <Text text="{type}" />
+            <Label text="Category" />
+            <Text text="{CATEGORY}" />
             <Label text="Price" />
-            <Text text="{price} {unit}" />
-            <Label text="Benefits" />
-            <Text text="{healthBenefits}" />
+            <Text text="{PRICE} {CURRENCY_CODE}" />
+            <Label text="Description" />
+            <Text text="{DESCRIPTION}" />
+
+            <Label text="Supplier Name" />
+            <Text text="{To_Supplier/COMPANY_NAME}" />
+            <Label text="Supplier Email" />
+            <Text text="{To_Supplier/EMAIL_ADDRESS}" />
+            <Label text="Supplier Phone no." />
+            <Text text="{To_Supplier/PHONE_NUMBER}" />
         </form:content>
     </form:SimpleForm>
 </core:FragmentDefinition>

@@ -2,3 +2,14 @@ specVersion: "2.6"
 metadata:
   name: fiorilikeapp
 type: application
+server:
+  customMiddleware:
+  - name: fiori-tools-proxy
+    afterMiddleware: compression
+    configuration:
+      ignoreCertError: true
+      backend:
+      - path: /sap
+        url: https://anubhavtrainings.server.com:44321
+        destination: ATS_S4HANA
+        client: "800"

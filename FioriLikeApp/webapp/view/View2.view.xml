@@ -7,17 +7,17 @@
     controllerName="ey.sd.products.controller.View2"
 >
     <Page
-        title="{name}"
+        title="{NAME}"
         showNavButton="true"
         navButtonPress="handleGoBack"
     >
         <content>
             <ObjectHeader
-                title="{name}"
-                intro="{type}"
-                number="{price}"
-                numberUnit="{unit}"
-                icon="{image}"
+                title="{NAME}"
+                intro="{CATEGORY}"
+                number="{PRICE}"
+                numberUnit="{CURRENCY_CODE}"
+                icon="sap-icon://product"
             />
             <!-- <MessageStrip
                 text="Info:- This is the example of message strip"

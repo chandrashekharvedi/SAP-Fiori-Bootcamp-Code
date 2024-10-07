@@ -15,16 +15,15 @@
             <List
                 id="idFruitsList"
                 items="{
-                    path: '/fruits',
-                    sorter: {
-                        path: 'type',
-                        group: true
-                    }    
+                    path: '/ProductSet' 
                 }"
                 headerText="{i18n>ListTitle}"
                 mode="SingleSelectMaster"
                 delete="handleFruitDelete"
                 itemPress="handleItemPress"
+                growing="true"
+                growingThreshold="10"
+                growingScrollToLoad="true"
             >   
                 <headerToolbar>
                     <Toolbar >
@@ -34,16 +33,16 @@
                 </headerToolbar>
                 <items>
                     <ObjectListItem
-                        title="{name}"
-                        intro="{type}"
-                        number="{price}"
-                        numberUnit="{unit}"
-                        icon="{image}"
+                        title="{NAME}"
+                        intro="{CATEGORY}"
+                        number="{PRICE}"
+                        numberUnit="{CURRENCY_CODE}"
+                        icon="sap-icon://product"
                         type="Navigation">
                     
-                        <firstStatus>
+                        <!-- <firstStatus>
                             <ObjectStatus text="{status}" state="{= ${status} === 'Available' ? 'Success' : (${status} === 'Discontinued' ? 'Error' : 'Warning')}"  ></ObjectStatus>
-                        </firstStatus>
+                        </firstStatus> -->
                     </ObjectListItem>
                 </items>
             </List>
@@ -51,7 +50,7 @@
         <footer>
             <Toolbar >
                 <ToolbarSpacer ></ToolbarSpacer>
-                <Button text="Save" type="Success" press="onSave" ></Button>
+                <Button text="Add" type="Emphasized" press="handelAddNewProd" icon="sap-icon://add" ></Button>
             </Toolbar>
         </footer>
     </Page>

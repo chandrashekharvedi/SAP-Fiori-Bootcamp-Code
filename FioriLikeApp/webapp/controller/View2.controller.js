@@ -14,12 +14,29 @@ sap.ui.define([
             this.oRouter.getRoute("fruits").attachMatched(this.ironman, this);
         },
         ironman: function(oEvent) {
-            // Extract the Fruit Id from the route arguments
-            let sFruitId = oEvent.getParameter("arguments").fruitId;
-            // Build the path for element binding using the fruit ex:- '/fruits/3'
-            let sPath = "/fruits/" + sFruitId;
-            // Bind the current view (view2) object directly with the model path
-            this.getView().bindElement(sPath);
+            // // Extract the Fruit Id from the route arguments
+            // let sFruitId = oEvent.getParameter("arguments").fruitId;
+            // // Build the path for element binding using the fruit ex:- '/fruits/3'
+            // let sPath = "/fruits/" + sFruitId;
+            // // Bind the current view (view2) object directly with the model path
+            // this.getView().bindElement(sPath);
+
+            // For pruducts from odata service
+            // Step 1: Extract the product id from the router
+            let sProductId = oEvent.getParameter("arguments").productId;
+            // Step 2: Construct the path for product
+            let sProdPath;
+            try {
+                sProdPath = this.getView().getModel().createKey("/ProductSet", {
+                    PRODUCT_ID: sProductId
+                });
+            } catch (error) {
+                sProdPath = `/ProductSet('${sProductId}')`;
+            }
+            // Step 3: bind the view with product path
+            this.getView().bindElement(sProdPath, {
+                expand: 'To_Supplier'
+            });
 
             // Read the query arguments
             let oQuery = oEvent.getParameter("arguments")["?query"];

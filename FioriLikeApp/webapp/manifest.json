@@ -9,7 +9,16 @@
         },
         "title": "{{appTitle}}",
         "description": "{{appDesciption}}",
-        "i18n": "i18n/i18n.properties"
+        "i18n": "i18n/i18n.properties",
+        "dataSources": {
+            "myOdataService": {
+                "type": "OData",
+                "uri": "/sap/opu/odata/sap/ZEY_SEPT_ODATA_SRV/",
+                "settings": {
+                    "odataVersion": "2.0"
+                }
+            }
+        }
     },
     "sap.ui":{
         "deviceTypes": {
@@ -53,7 +62,7 @@
                     "target": ["tom", "empty"]
                 },
                 {
-                    "pattern": "fruits/{fruitId}:?query:",
+                    "pattern": "products/{productId}:?query:",
                     "name": "fruits",
                     "target": ["tom", "jerry"]
                 },
@@ -61,6 +70,11 @@
                     "pattern": "supplier/{supplierId}",
                     "name": "supplier",
                     "target": ["tom", "supplier"]
+                },
+                {
+                    "pattern": "add",
+                    "name": "addProd",
+                    "target": ["tom", "addProd"]
                 }
             ],
             "targets": {
@@ -83,14 +97,18 @@
                     "viewId": "idSupplierView",
                     "viewName": "Supplier",
                     "controlAggregation": "detailPages"
+                },
+                "addProd": {
+                    "viewId": "idAddPrdView",
+                    "viewName": "Add",
+                    "controlAggregation": "detailPages"
                 }
             }
         },
         "models": {
             "":{
-                "type": "sap.ui.model.json.JSONModel",
-                "uri": "model/mockdata/fruits.json",
-                "preload": false,
+                "dataSource": "myOdataService",
+                "preload": true,
                 "settings": {}
             },
             "UIprops": {

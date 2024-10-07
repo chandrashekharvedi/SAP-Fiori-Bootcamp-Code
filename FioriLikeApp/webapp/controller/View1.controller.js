@@ -14,7 +14,7 @@ sap.ui.define([
             // routerObj.navTo("nameOfRoute", oOptions?)
 
             this.oRouter.navTo("fruits", {
-                fruitId: sPath
+                productId: sPath
             });
 
             // // user case: to navigate to View2
@@ -78,14 +78,19 @@ sap.ui.define([
             alert("Under Development");
         },
 
+        handelAddNewProd: function() {
+            this.oRouter.navTo("addProd");
+        },
+
         handleItemPress: function(oEvent) {
             let oSelectedItem = oEvent.getParameter("listItem");
             // Get the selected elements path
             let sPath = oSelectedItem.getBindingContextPath();
             // Get the index of the item in the model
-            let sIndex = sPath.split("/")[2];
+            // let sIndex = sPath.split("/")[2];
+            let sProductId = oSelectedItem.getBindingContext().getProperty("PRODUCT_ID");
             // Call the Go to Next function navigate on view 2 with the path
-            this.handleGoNext(sIndex);
+            this.handleGoNext(sProductId);
         }
     });
 })
