@@ -22,7 +22,7 @@
                 delete="handleFruitDelete"
                 itemPress="handleItemPress"
                 growing="true"
-                growingThreshold="10"
+                growingThreshold="50"
                 growingScrollToLoad="true"
             >   
                 <headerToolbar>

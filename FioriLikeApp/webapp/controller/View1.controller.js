@@ -13,9 +13,12 @@ sap.ui.define([
 
             // routerObj.navTo("nameOfRoute", oOptions?)
 
-            this.oRouter.navTo("fruits", {
+            this.oRouter.navTo("edit", {
                 productId: sPath
             });
+            // this.oRouter.navTo("fruits", {
+            //     productId: sPath
+            // });
 
             // // user case: to navigate to View2
             // let oView = this.getView();

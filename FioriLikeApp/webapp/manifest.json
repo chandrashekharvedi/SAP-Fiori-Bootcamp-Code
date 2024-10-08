@@ -75,6 +75,11 @@
                     "pattern": "add",
                     "name": "addProd",
                     "target": ["tom", "addProd"]
+                },
+                {
+                    "pattern": "edit/{productId}",
+                    "name": "edit",
+                    "target": ["tom", "addProd"]
                 }
             ],
             "targets": {
@@ -109,7 +114,9 @@
             "":{
                 "dataSource": "myOdataService",
                 "preload": true,
-                "settings": {}
+                "settings": {
+                    "defaultBindingMode": "TwoWay"
+                }
             },
             "UIprops": {
                 "type": "sap.ui.model.json.JSONModel",

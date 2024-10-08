@@ -1,64 +1,270 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="ey.sd.products.controller.Add" >
-
-    <Page title="Add New Product" showNavButton="true" navButtonPress="onBack">
-
+<mvc:View
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    controllerName="ey.sd.products.controller.Add"
+>
+    <Page
+        id="idAddUpdatePrdPage"
+        title="Add New Product"
+        showNavButton="true"
+        navButtonPress="onBack"
+    >
         <content>
-            <form:SimpleForm  
-                title="New Product"
+        <form:SimpleForm
+                id="idProductSimpleForm"
                 editable="true"
-                layout="ResponsiveGridLayout" 
+                layout="ResponsiveGridLayout"
                 labelSpanL="3"
                 labelSpanM="3"
                 labelSpanXL="3"
                 labelSpanS="12"
-
                 emptySpanXL="4"
                 emptySpanL="4"
                 emptySpanM="4"
                 emptySpanS="0"
-            
             >
-                <Label text="Product ID" ></Label>
-                <Input placeholder="Enter Product Id" value="{add>/PRODUCT_ID}" ></Input>
+                <Label text="Product ID" />
+                <Input
+                    id="idProductIDInput"
+                    placeholder="Enter Product Id"
+                    value="{PRODUCT_ID}"
+                />
+                <Button
+                    text="Get Most Expense Product"
+                    icon="sap-icon://money-bills"
+                    press="onLoadExpProduct"
+                />
 
-                <Label text="Name" ></Label>
-                <Input  placeholder="Enter Product Name" value="{add>/NAME}" ></Input>
-                
-                <Label text="Category"  ></Label>
-                <Select forceSelection="false" selectedKey="{add>/CATEGORY}" >
+                <Label text="Name" />
+                <Input
+                    placeholder="Enter Product Name"
+                    value="{NAME}"
+                />
+
+                <Label text="Category" />
+                <Select
+                    id="idCategorySelect"
+                    forceSelection="false"
+                    selectedKey="{CATEGORY}"
+                >
                     <items>
-                        <core:Item text="Notebooks" key="Notebooks" ></core:Item>
-                        <core:Item text="Flat Screen Monitors" key="Flat Screen Monitors" ></core:Item>
-                        <core:Item text="Laser Printers" key="Laser Printers" ></core:Item>
-                        <core:Item text="Mice" key="Mice" ></core:Item>
-                        <core:Item text="Keyboards" key="Keyboards" ></core:Item>
-                        <core:Item text="Scanners" key="Scanners" ></core:Item>
+                        <core:Item
+                            text="Notebooks"
+                            key="Notebooks"
+                        />
+                        <core:Item
+                            text="Flat Screen Monitors"
+                            key="Flat Screen Monitors"
+                        />
+                        <core:Item
+                            text="Laser Printers"
+                            key="Laser Printers"
+                        />
+                        <core:Item
+                            text="Mice"
+                            key="Mice"
+                        />
+                        <core:Item
+                            text="Keyboards"
+                            key="Keyboards"
+                        />
+                        <core:Item
+                            text="Scanners"
+                            key="Scanners"
+                        />
                     </items>
                 </Select>
 
-                <Label text="Price" ></Label>
-                <Input  placeholder="0.00" textAlign="Right" value="{add>/PRICE}" ></Input>
-                <Input placeholder="USD" value="{add>/CURRENCY_CODE}"></Input>
-
-                <Label text="Description" ></Label>
-                <TextArea placeholder="Enter Product Description" value="{add>/DESCRIPTION}" />
-
-                <Label text="Supplier" ></Label>
-                <Select items="{/SupplierSet}" showSecondaryValues="true" forceSelection="false" selectedKey="{add>/SUPPLIER_ID}" change="onSupplierSelect"  >
+                <Label text="Price" />
+                <Input
+                    placeholder="0.00"
+                    textAlign="Right"
+                    value="{PRICE}"
+                />
+                <Select selectedKey="{CURRENCY_CODE}">
                     <items>
-                        <core:ListItem text="{COMPANY_NAME}" key="{BP_ID}" additionalText="{BP_ID}" ></core:ListItem>
+                        <core:Item
+                            text="USD"
+                            key="USD"
+                        />
+                        <core:Item
+                            text="EUR"
+                            key="EUR"
+                        />
+                        <core:Item
+                            text="INR"
+                            key="INR"
+                        />
+                        <core:Item
+                            text="JPY"
+                            key="JPY"
+                        />
+                    </items>
+                </Select>
+
+                <Label text="Description" />
+                <TextArea
+                    placeholder="Enter Product Description"
+                    value="{DESCRIPTION}"
+                />
+
+                <Label text="Supplier" />
+                <Select
+                    items="{/SupplierSet}"
+                    showSecondaryValues="true"
+                    forceSelection="false"
+                    selectedKey="{SUPPLIER_ID}"
+                    change="onSupplierSelect"
+                >
+                    <items>
+                        <core:ListItem
+                            text="{COMPANY_NAME}"
+                            key="{BP_ID}"
+                            additionalText="{BP_ID}"
+                        />
                     </items>
                 </Select>
             </form:SimpleForm>
+            <!-- <form:SimpleForm
+                id="idProductSimpleForm"
+                editable="true"
+                layout="ResponsiveGridLayout"
+                labelSpanL="3"
+                labelSpanM="3"
+                labelSpanXL="3"
+                labelSpanS="12"
+                emptySpanXL="4"
+                emptySpanL="4"
+                emptySpanM="4"
+                emptySpanS="0"
+            >
+                <Label text="Product ID" />
+                <Input
+                    id="idProductIDInput"
+                    placeholder="Enter Product Id"
+                    value="{add>/PRODUCT_ID}"
+                />
+                <Button
+                    text="Get Most Expense Product"
+                    icon="sap-icon://money-bills"
+                    press="onLoadExpProduct"
+                />
+
+                <Label text="Name" />
+                <Input
+                    placeholder="Enter Product Name"
+                    value="{add>/NAME}"
+                />
+
+                <Label text="Category" />
+                <Select
+                    id="idCategorySelect"
+                    forceSelection="false"
+                    selectedKey="{add>/CATEGORY}"
+                >
+                    <items>
+                        <core:Item
+                            text="Notebooks"
+                            key="Notebooks"
+                        />
+                        <core:Item
+                            text="Flat Screen Monitors"
+                            key="Flat Screen Monitors"
+                        />
+                        <core:Item
+                            text="Laser Printers"
+                            key="Laser Printers"
+                        />
+                        <core:Item
+                            text="Mice"
+                            key="Mice"
+                        />
+                        <core:Item
+                            text="Keyboards"
+                            key="Keyboards"
+                        />
+                        <core:Item
+                            text="Scanners"
+                            key="Scanners"
+                        />
+                    </items>
+                </Select>
+
+                <Label text="Price" />
+                <Input
+                    placeholder="0.00"
+                    textAlign="Right"
+                    value="{add>/PRICE}"
+                />
+                <Select selectedKey="{add>/CURRENCY_CODE}">
+                    <items>
+                        <core:Item
+                            text="USD"
+                            key="USD"
+                        />
+                        <core:Item
+                            text="EUR"
+                            key="EUR"
+                        />
+                        <core:Item
+                            text="INR"
+                            key="INR"
+                        />
+                        <core:Item
+                            text="JPY"
+                            key="JPY"
+                        />
+                    </items>
+                </Select>
+
+                <Label text="Description" />
+                <TextArea
+                    placeholder="Enter Product Description"
+                    value="{add>/DESCRIPTION}"
+                />
+
+                <Label text="Supplier" />
+                <Select
+                    items="{/SupplierSet}"
+                    showSecondaryValues="true"
+                    forceSelection="false"
+                    selectedKey="{add>/SUPPLIER_ID}"
+                    change="onSupplierSelect"
+                >
+                    <items>
+                        <core:ListItem
+                            text="{COMPANY_NAME}"
+                            key="{BP_ID}"
+                            additionalText="{BP_ID}"
+                        />
+                    </items>
+                </Select>
+            </form:SimpleForm> -->
         </content>
 
         <footer>
             <Toolbar>
-                <ToolbarSpacer/>
-                <Button text="Save" type="Success" press="handelOnSave" />
+                <ToolbarSpacer />
+                <Button
+                    text="Save"
+                    type="Success"
+                    press="handelOnSave"
+                />
+                <Button
+                    id="idDeleteButton"
+                    text="Delete"
+                    type="Reject"
+                    icon="sap-icon://delete"
+                    press="handelOnDelete"
+                />
+                <Button
+                    text="Clear"
+                    type="Emphasized"
+                    press="clearForm"
+                />
             </Toolbar>
         </footer>
-
     </Page>
-
 </mvc:View>
